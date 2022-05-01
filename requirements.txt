@@ -1,1 +1,5 @@
 django
+pymysql
+django-cors-headers
+loguru
+djangorestframework
