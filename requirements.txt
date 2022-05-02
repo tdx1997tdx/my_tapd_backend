@@ -3,4 +3,4 @@ pymysql
 django-cors-headers
 loguru
 djangorestframework
-uwsgi
+gunicorn
