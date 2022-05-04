@@ -15,8 +15,8 @@ sql = "SELECT concat('DROP TABLE ', table_name, ';') FROM information_schema.tab
 my_cursor.execute(sql)
 data = my_cursor.fetchall()
 for i in data:
-    print(i)
-    my_cursor.execute(i)
+    print(i[0])
+    my_cursor.execute(i[0])
     my_cursor.commit()
 
 my_cursor.close()
