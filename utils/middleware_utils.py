@@ -4,7 +4,7 @@ from .http_response_utils import R
 from django.http.response import JsonResponse
 import traceback
 import datetime
-from app.login.models import User
+from app.user.models import User
 from utils.http_response_utils import get_response_json
 
 

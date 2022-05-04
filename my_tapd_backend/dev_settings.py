@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "corsheaders",
-    'app.login'
+    'app.user'
 ]
 
 MIDDLEWARE = [
@@ -111,6 +111,9 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = False
+# 避免时区的问题
+CELERY_ENABLE_UTC = False
+DJANGO_CELERY_BEAT_TZ_AWARE = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
