@@ -11,22 +11,27 @@ connection = pymysql.connect(
 )
 
 my_cursor = connection.cursor()
-# 清空表
-sql = "SELECT concat('TRUNCATE TABLE ', table_name, ';') FROM information_schema.tables WHERE table_schema = 'my_tapd_backend';"
+# # 清空表
+# sql = "SELECT concat('TRUNCATE TABLE ', table_name, ';') FROM information_schema.tables WHERE table_schema = 'my_tapd_backend';"
+# my_cursor.execute(sql)
+# data = my_cursor.fetchall()
+# for i in data:
+#     print(i[0])
+#     my_cursor.execute(i[0])
+#     my_cursor.commit()
+# # 删除表
+# sql = "SELECT concat('DROP TABLE ', table_name, ';') FROM information_schema.tables WHERE table_schema = 'my_tapd_backend';"
+# my_cursor.execute(sql)
+# data = my_cursor.fetchall()
+# for i in data:
+#     print(i[0])
+#     my_cursor.execute(i[0])
+#     my_cursor.commit()
+sql = "DROP DATABASE my_tapd_backend"
 my_cursor.execute(sql)
-data = my_cursor.fetchall()
-for i in data:
-    print(i[0])
-    my_cursor.execute(i[0])
-    my_cursor.commit()
-# 删除表
-sql = "SELECT concat('DROP TABLE ', table_name, ';') FROM information_schema.tables WHERE table_schema = 'my_tapd_backend';"
+my_cursor.commit()
+sql = "CREATE DATABASE my_tapd_backend"
 my_cursor.execute(sql)
-data = my_cursor.fetchall()
-for i in data:
-    print(i[0])
-    my_cursor.execute(i[0])
-    my_cursor.commit()
-
+my_cursor.commit()
 my_cursor.close()
 connection.close()
