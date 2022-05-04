@@ -26,9 +26,9 @@ my_cursor = connection.cursor()
 #     print(i[0])
 #     my_cursor.execute(i[0])
 #     my_cursor.commit()
-sql = "DROP DATABASE my_tapd_backend IF EXISTS"
+sql = "DROP DATABASE IF EXISTS my_tapd_backend"
 my_cursor.execute(sql)
-sql = "CREATE DATABASE my_tapd_backend IF NOT EXISTS"
+sql = "CREATE DATABASE IF NOT EXISTS my_tapd_backend"
 my_cursor.execute(sql)
 connection.commit()
 connection.close()
