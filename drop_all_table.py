@@ -7,7 +7,6 @@ connection = pymysql.connect(
     user=DATABASES['default']['USER'],  # 用户名
     password=DATABASES['default']['PASSWORD'],  # 密码
     charset="utf8",  # 字符集
-    db=DATABASES['default']['NAME']  # 数据库
 )
 
 my_cursor = connection.cursor()
