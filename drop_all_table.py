@@ -29,9 +29,7 @@ my_cursor = connection.cursor()
 #     my_cursor.commit()
 sql = "DROP DATABASE my_tapd_backend"
 my_cursor.execute(sql)
-my_cursor.commit()
 sql = "CREATE DATABASE my_tapd_backend"
 my_cursor.execute(sql)
-my_cursor.commit()
-my_cursor.close()
+connection.commit()
 connection.close()
