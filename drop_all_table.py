@@ -28,7 +28,7 @@ my_cursor = connection.cursor()
 #     my_cursor.commit()
 sql = "DROP DATABASE IF EXISTS my_tapd_backend"
 my_cursor.execute(sql)
-sql = "CREATE DATABASE IF NOT EXISTS my_tapd_backend"
+sql = "CREATE DATABASE IF NOT EXISTS my_tapd_backend CHARACTER SET utf8"
 my_cursor.execute(sql)
 connection.commit()
 connection.close()
