@@ -17,10 +17,9 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('login', Login.as_view()),
-    path('regist', Regist.as_view()),
-    path('report', Report.as_view()),
-    path('getUserByUsername', GetUserByUsername.as_view()),
-    path('getUser', GetUser.as_view()),
-    path('updateUserByUsername', UpdateUserByUsername.as_view()),
+    path('getArticle', GetArticle.as_view()),
+    path('getArticleById', GetArticleById.as_view()),
+    path('publicArticle', PublicArticle.as_view()),
+    path('deleteArticle', DeleteArticle.as_view()),
+    path('updateArticle', UpdateArticle.as_view()),
 ]
