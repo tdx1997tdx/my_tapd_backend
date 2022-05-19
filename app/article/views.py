@@ -50,9 +50,13 @@ class GetArticleById(View):
     def get(self, request):
         id = request.GET.get("id")
         article = Article.objects.get(id=id)
+        article.pv = article.pv + 1
+        article.save()
         tmp = model_to_dict(article)
         tmp['create_time'] = article.create_time
         tmp['update_time'] = article.update_time
+        tmp['pv'] = article.pv
+        tmp['zan'] = article.zan
         tmp['author_name'] = article.author.nickname
         return get_response_json("OK", tmp)
 

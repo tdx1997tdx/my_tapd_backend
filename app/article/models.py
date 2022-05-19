@@ -9,4 +9,7 @@ class Article(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
     is_delete = models.IntegerField(default=0)
+    pv = models.IntegerField(default=0)
+    zan = models.IntegerField(default=0)
+    cai = models.IntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
