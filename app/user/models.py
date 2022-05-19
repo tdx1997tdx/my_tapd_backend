@@ -13,3 +13,4 @@ class User(models.Model):
     token = models.CharField(max_length=50)
     fail_time = models.DateTimeField(
         default=(datetime.datetime.now() + datetime.timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S"))
+    logo = models.CharField(max_length=100, default='getImage/admin.jpg')

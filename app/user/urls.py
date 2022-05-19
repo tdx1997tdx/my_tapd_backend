@@ -23,4 +23,6 @@ urlpatterns = [
     path('getUserByUsername', GetUserByUsername.as_view()),
     path('getUser', GetUser.as_view()),
     path('updateUserByUsername', UpdateUserByUsername.as_view()),
+    path('getImage/<str:uri>', GetImage.as_view()),
+    path('uploadImage', UploadImage.as_view()),
 ]

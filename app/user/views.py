@@ -6,6 +6,9 @@ from utils.http_response_utils import get_response_json
 import uuid
 import datetime
 from django.core.paginator import Paginator
+from my_tapd_backend.settings import BASE_DIR
+import os
+from django.http import Http404, HttpResponse
 
 
 class Login(View):
@@ -44,12 +47,11 @@ class GetUserByUsername(View):
 
     def get(self, request):
         params = request.GET
-        users = User.objects.filter(username=params.get("username"))
-        if len(users):
-            user = users[0]
+        user = User.objects.get(username=params.get("username"))
+        if user:
             ret = {"id": user.id, 'username': user.username, 'nickname': user.nickname,
                    'introduction': user.introduction,
-                   'birthday': user.birthday}
+                   'birthday': user.birthday, 'logo': user.logo}
             return get_response_json("OK", ret)
         return get_response_json("OK", {})
 
@@ -58,12 +60,12 @@ class UpdateUserByUsername(View):
 
     def post(self, request):
         data = json.loads(request.body)
-        users = User.objects.filter(username=data.get("username"))
-        if len(users):
-            user = users[0]
+        user = User.objects.get(username=data.get("username"))
+        if user:
             user.nickname = data.get("nickname")
             user.introduction = data.get("introduction")
             user.birthday = data.get("birthday")
+            user.logo = data.get("logo")
             user.save()
         return get_response_json("OK")
 
@@ -97,3 +99,26 @@ class GetUser(View):
             tmp['update_time'] = i.update_time
             ret_data["data"].append(tmp)
         return get_response_json("OK", ret_data)
+
+
+class GetImage(View):
+
+    def get(self, request, uri):
+        path = os.path.join(BASE_DIR, 'static_file', uri)
+        if not os.path.exists(path):
+            return HttpResponse("图片资源不存在", status=404)
+        file = open(path, "rb")
+        return HttpResponse(file.read(), content_type='image/jpg')
+
+
+class UploadImage(View):
+
+    def post(self, request):
+        file = request.FILES.get("file")
+        file_name = str(uuid.uuid4()) + "." + str(file).split('.')[-1]
+        path = os.path.join(BASE_DIR, 'static_file', file_name)
+        with open(path, 'wb') as f:
+            # 3.获取上传文件的内容并写到创建的文件中
+            for content in file.chunks():  # pic.chunks() 上传文件的内容。
+                f.write(content)
+        return get_response_json("OK", {"path": "getImage/" + file_name})

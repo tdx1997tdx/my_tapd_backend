@@ -26,10 +26,14 @@ class ExceptionMiddleware(MiddlewareMixin):
 
 class TokenMiddleware(MiddlewareMixin):
     """token验证中间件"""
-    uri_list = ['/api/login', '/api/regist']
+    uri_list = ['/api/login', '/api/regist', '/api/getImage', '/api/uploadImage']
 
     def process_request(self, request):
-        if request.path_info not in TokenMiddleware.uri_list:
+        is_pass = True
+        for i in TokenMiddleware.uri_list:
+            if i in request.path_info:
+                is_pass = False
+        if is_pass:
             token = request.META.get("HTTP_AUTHORIZATION")
             user_name = request.META.get("HTTP_LOGINNAME")
             if not (token and user_name):

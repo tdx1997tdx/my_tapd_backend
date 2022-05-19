@@ -37,6 +37,7 @@ class GetArticle(View):
         }
         for i in article:
             tmp = model_to_dict(i)
+            tmp['content'] = tmp['content'][:100]
             tmp['create_time'] = i.create_time
             tmp['update_time'] = i.update_time
             tmp['author_name'] = i.author.nickname
